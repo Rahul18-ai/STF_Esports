@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>STF ESPORTS Dashboard</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+</head>
+
+
+<body>
+
+
+<div class="bg-overlay"></div>
+
+
+<div class="container">
+
+
+    <!-- HEADER -->
+
+    <header class="header">
+
+
+        <div class="brand">
+
+
+            <div class="brand-logo-circle">
+
+                <img
+                    class="brand-logo"
+                    src="assets/default-logo.png"
+                    alt="STF Logo"
+                >
+
+            </div>
+
+
+            <div class="brand-text">
+
+                <h1>STF ESPORTS</h1>
+
+                <p>OVERALL STANDINGS</p>
+
+            </div>
+
+
+        </div>
+
+
+
+        <div class="event-section">
+
+            <input
+                type="text"
+                id="tournamentName"
+                value="STF ESPORTS SCRIMS 2026"
+            >
+
+        </div>
+
+
+
+        <div class="day-section">
+
+            <input
+                type="text"
+                id="dayNumber"
+                value="DAY 1"
+            >
+
+        </div>
+
+
+    </header>
+
+
+
+    <!-- LEADER -->
+
+
+    <section class="leader-panel">
+
+
+        <div class="leader-left">
+
+
+            <div class="leader-rank">
+
+                #1
+
+            </div>
+
+
+            <img
+                id="leaderLogo"
+                src="assets/default-logo.png"
+                alt="Leader Logo"
+            >
+
+
+            <div class="leader-team-info">
+
+                <h2 id="leaderName">
+
+                    Team 1
+
+                </h2>
+
+
+                <span>
+
+                    TABLE TOP
+
+                </span>
+
+            </div>
+
+
+        </div>
+
+
+
+        <div class="leader-stats">
+
+
+            <div class="stat-box">
+
+                <span>WWCD</span>
+
+                <h2 id="leaderWWCD">0</h2>
+
+            </div>
+
+
+            <div class="stat-box">
+
+                <span>MATCH</span>
+
+                <h2 id="leaderMatches">0</h2>
+
+            </div>
+
+
+            <div class="stat-box">
+
+                <span>PLACE</span>
+
+                <h2 id="leaderPlacement">0</h2>
+
+            </div>
+
+
+            <div class="stat-box">
+
+                <span>ELIMS</span>
+
+                <h2 id="leaderElims">0</h2>
+
+            </div>
+
+
+            <div class="stat-box">
+
+                <span>TOTAL</span>
+
+                <h2 id="leaderTotal">0</h2>
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- CONTROLS -->
+
+
+    <section class="controls">
+
+
+        <button id="saveBtn">
+
+            SAVE
+
+        </button>
+
+
+        <button id="loadBtn">
+
+            LOAD
+
+        </button>
+
+
+        <button id="resetBtn">
+
+            RESET
+
+        </button>
+
+
+        <button id="exportBtn">
+
+            EXPORT PNG
+
+        </button>
+
+
+    </section>
+
+
+
+    <!-- STANDINGS -->
+
+
+    <section class="standings">
+
+
+        <div class="standings-header">
+
+            <div>RK</div>
+
+            <div>LOGO</div>
+
+            <div>TEAM</div>
+
+            <div>WWCD</div>
+
+            <div>MAT</div>
+
+            <div>PLACE</div>
+
+            <div>ELIMS</div>
+
+            <div>TOTAL</div>
+
+        </div>
+
+
+        <div id="teamsContainer"></div>
+
+
+    </section>
+
+
+</div>
+
+
+
+<!-- TEAM TEMPLATE -->
+
+
+<template id="teamTemplate">
+
+
+    <div class="team-card">
+
+
+        <!-- RANK -->
+
+
+        <div class="rank-box">
+
+            #1
+
+        </div>
+
+
+
+        <!-- LOGO -->
+
+
+        <div class="logo-box">
+
+
+            <img
+                class="team-logo"
+                src="assets/default-logo.png"
+                alt="Team Logo"
+            >
+
+
+            <label class="upload-button">
+
+                ADD
+
+
+                <input
+                    type="file"
+                    class="logo-upload"
+                    accept="image/*"
+                >
+
+
+            </label>
+
+
+        </div>
+
+
+
+        <!-- TEAM -->
+
+
+        <div>
+
+            <input
+                type="text"
+                class="team-name"
+                value="Team"
+            >
+
+        </div>
+
+
+
+        <!-- WWCD -->
+
+
+        <div>
+
+            <input
+                type="number"
+                class="wwcd"
+                value="0"
+            >
+
+        </div>
+
+
+
+        <!-- MATCHES -->
+
+
+        <div>
+
+            <input
+                type="number"
+                class="matches"
+                value="0"
+            >
+
+        </div>
+
+
+
+        <!-- PLACE -->
+
+
+        <div>
+
+            <input
+                type="number"
+                class="placement"
+                value="0"
+            >
+
+        </div>
+
+
+
+        <!-- ELIMS -->
+
+
+        <div>
+
+            <input
+                type="number"
+                class="elims"
+                value="0"
+            >
+
+        </div>
+
+
+
+        <!-- TOTAL -->
+
+
+        <div class="total-box">
+
+            0
+
+        </div>
+
+
+    </div>
+
+
+</template>
+
+
+
+<!-- HTML2CANVAS MUST LOAD BEFORE SCRIPT.JS -->
+
+
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+
+
+<script src="script.js"></script>
+
+
+</body>
+
+</html>
