@@ -2006,3 +2006,84 @@ window.addEventListener(
         }
     }
 );
+/* =========================================================
+   BRAND LOGO UPLOAD
+========================================================= */
+
+const brandLogoUpload =
+    document.getElementById("brandLogoUpload");
+
+const brandLogo =
+    document.querySelector(".brand-logo");
+
+const BRAND_LOGO_STORAGE_KEY =
+    "stf_brand_logo";
+
+
+brandLogoUpload.addEventListener(
+    "change",
+    function (event) {
+
+        const file =
+            event.target.files[0];
+
+        if (!file) {
+            return;
+        }
+
+        if (!file.type.startsWith("image/")) {
+
+            alert("Please select an image file.");
+
+            event.target.value = "";
+
+            return;
+        }
+
+
+        const reader =
+            new FileReader();
+
+
+        reader.onload =
+            function (readerEvent) {
+
+                const uploadedLogo =
+                    readerEvent.target.result;
+
+
+                brandLogo.src =
+                    uploadedLogo;
+
+
+                localStorage.setItem(
+                    BRAND_LOGO_STORAGE_KEY,
+                    uploadedLogo
+                );
+            };
+
+
+        reader.readAsDataURL(file);
+    }
+);
+
+
+/* LOAD SAVED BRAND LOGO */
+
+window.addEventListener(
+    "load",
+    function () {
+
+        const savedBrandLogo =
+            localStorage.getItem(
+                BRAND_LOGO_STORAGE_KEY
+            );
+
+
+        if (savedBrandLogo) {
+
+            brandLogo.src =
+                savedBrandLogo;
+        }
+    }
+);
