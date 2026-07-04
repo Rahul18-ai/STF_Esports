@@ -191,6 +191,30 @@ body {
 
     object-fit: contain;
 }
+.brand-upload-button {
+
+    padding: 5px 8px;
+
+    border-radius: 6px;
+
+    cursor: pointer;
+
+    color: #00152f;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    white-space: nowrap;
+
+    background: var(--blue);
+}
+
+
+#brandLogoUpload {
+
+    display: none;
+}
 
 
 .brand-text h1 {
