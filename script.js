@@ -890,17 +890,16 @@ function buildExportElement() {
     }
 
 
-    /* REMOVE UPLOAD BUTTONS */
+    /* REMOVE ALL UPLOAD BUTTONS FROM EXPORT */
 
-    exportContainer
-        .querySelectorAll(
-            ".upload-button"
-        )
-        .forEach(function (button) {
+exportContainer
+    .querySelectorAll(
+        ".upload-button, .brand-upload-button"
+    )
+    .forEach(function (button) {
 
-            button.remove();
-        });
-
+        button.remove();
+    });
 
     /* HEADER EXPORT */
 
